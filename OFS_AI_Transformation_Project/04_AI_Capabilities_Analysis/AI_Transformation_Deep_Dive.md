@@ -171,6 +171,68 @@ OFS has a unique advantage: **60+ years of project data, deep manufacturing expe
 
 Instead of a monolithic AI system, we architect **specialized agents** that collaborate to solve complex workflows. This approach provides:
 
+```mermaid
+graph TB
+    subgraph Benefits["Multi-Agent Benefits"]
+        MOD[Modularity<br/>Easy Updates]
+        SCALE[Scalability<br/>Parallel Execution]
+        EXPLAIN[Explainability<br/>Isolated Reasoning]
+        FAULT[Fault Tolerance<br/>System Resilience]
+        SPEC[Specialization<br/>Optimal Techniques]
+    end
+
+    subgraph Agents["Specialized AI Agents"]
+        CONV[Conversational<br/>Intake Agent]
+        SPATIAL[Spatial<br/>Intelligence Agent]
+        PROD[Product<br/>Recommendation Agent]
+        BUDGET[Budget<br/>Optimization Agent]
+        COMPLY[Compliance<br/>Validation Agent]
+        SUSTAIN[Sustainability<br/>Intelligence Agent]
+        VIZ[Visualization &<br/>Rendering Agent]
+        PROCURE[Procurement &<br/>Logistics Agent]
+    end
+
+    subgraph Workflow["Orchestration Workflow"]
+        STATE[Shared State<br/>Object]
+        GRAPH[LangGraph<br/>Orchestrator]
+    end
+
+    CONV --> STATE
+    SPATIAL --> STATE
+    PROD --> STATE
+    BUDGET --> STATE
+    COMPLY --> STATE
+    SUSTAIN --> STATE
+    VIZ --> STATE
+    PROCURE --> STATE
+
+    STATE --> GRAPH
+    GRAPH --> CONV
+    GRAPH --> SPATIAL
+    GRAPH --> PROD
+    GRAPH --> BUDGET
+    GRAPH --> COMPLY
+    GRAPH --> SUSTAIN
+    GRAPH --> VIZ
+    GRAPH --> PROCURE
+
+    style MOD fill:#d4edda
+    style SCALE fill:#d4edda
+    style EXPLAIN fill:#d4edda
+    style FAULT fill:#d4edda
+    style SPEC fill:#d4edda
+    style CONV fill:#fff3cd
+    style SPATIAL fill:#fff3cd
+    style PROD fill:#fff3cd
+    style BUDGET fill:#fff3cd
+    style COMPLY fill:#fff3cd
+    style SUSTAIN fill:#fff3cd
+    style VIZ fill:#fff3cd
+    style PROCURE fill:#fff3cd
+    style STATE fill:#e1f5ff
+    style GRAPH fill:#e1f5ff
+```
+
 - **Modularity:** Easy to update individual agents
 - **Scalability:** Agents can run independently and in parallel
 - **Explainability:** Each agent's reasoning is isolated
@@ -1816,6 +1878,56 @@ class ProcurementOrchestrator:
 ---
 
 ## Machine Learning Models
+
+### ML Model Ecosystem
+
+```mermaid
+graph TB
+    subgraph Training["Model Training Pipeline"]
+        DATA[Historical Data<br/>50K+ Projects]
+        FEATURES[Feature Engineering<br/>User/Product/Context]
+        TRAIN[Model Training<br/>PyTorch/TensorFlow]
+        EVAL[Evaluation<br/>A/B Testing]
+    end
+
+    subgraph Models["Production Models"]
+        REC[Product<br/>Recommendation Model]
+        LAYOUT[Layout<br/>Generation Model]
+        DEMAND[Demand<br/>Forecasting Model]
+        PRICE[Price<br/>Optimization Model]
+    end
+
+    subgraph Serving["Model Serving"]
+        STORE[Model Registry<br/>Versioning]
+        API[Prediction API<br/>TorchServe/Ray]
+        MONITOR[Performance<br/>Monitoring]
+    end
+
+    DATA --> FEATURES
+    FEATURES --> TRAIN
+    TRAIN --> EVAL
+    EVAL --> REC
+    EVAL --> LAYOUT
+    EVAL --> DEMAND
+    EVAL --> PRICE
+
+    REC --> STORE
+    LAYOUT --> STORE
+    DEMAND --> STORE
+    PRICE --> STORE
+
+    STORE --> API
+    API --> MONITOR
+    MONITOR -.->|Retrain Trigger| TRAIN
+
+    style DATA fill:#e1f5ff
+    style REC fill:#d4edda
+    style LAYOUT fill:#d4edda
+    style DEMAND fill:#d4edda
+    style PRICE fill:#d4edda
+    style API fill:#fff3cd
+    style MONITOR fill:#fff3cd
+```
 
 ### Model 1: Product Recommendation Model
 

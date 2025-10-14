@@ -142,24 +142,34 @@ An intelligent, multi-agent platform that:
 
 Instead of a monolithic AI system, we deploy **specialized agents** that collaborate:
 
-```
-User Request
-    ↓
-Conversational Agent (understands requirements)
-    ↓
-Spatial Intelligence Agent (analyzes floor plans)
-    ↓
-Product Recommendation Agent (suggests furniture)
-    ↓
-Budget Optimization Agent (generates scenarios)
-    ↓
-Compliance Agent (checks ADA/fire codes)
-    ↓
-Sustainability Agent (calculates carbon footprint)
-    ↓
-Visualization Agent (renders 3D/AR/VR)
-    ↓
-Final Proposal
+```mermaid
+graph TD
+    A[User Request] --> B[Conversational Agent]
+    B --> C[Spatial Intelligence Agent]
+    C --> D[Product Recommendation Agent]
+    D --> E[Budget Optimization Agent]
+    E --> F[Compliance Agent]
+    F --> G[Sustainability Agent]
+    G --> H[Visualization Agent]
+    H --> I[Final Proposal]
+
+    B -.->|understands requirements| C
+    C -.->|analyzes floor plans| D
+    D -.->|suggests furniture| E
+    E -.->|generates scenarios| F
+    F -.->|checks ADA/fire codes| G
+    G -.->|calculates carbon footprint| H
+    H -.->|renders 3D/AR/VR| I
+
+    style A fill:#e1f5ff
+    style I fill:#d4edda
+    style B fill:#fff3cd
+    style C fill:#fff3cd
+    style D fill:#fff3cd
+    style E fill:#fff3cd
+    style F fill:#fff3cd
+    style G fill:#fff3cd
+    style H fill:#fff3cd
 ```
 
 **Benefits:**
@@ -193,6 +203,27 @@ Final Proposal
 ---
 
 ## Implementation Roadmap
+
+```mermaid
+gantt
+    title OFS AI Platform Implementation Timeline
+    dateFormat YYYY-MM
+    section Phase 1: MVP
+    Conversational Interface     :2025-01, 2025-04
+    Floor Plan Intelligence      :2025-01, 2025-04
+    Budget Scenarios            :2025-02, 2025-04
+    3D Visualization            :2025-03, 2025-04
+    section Phase 2: Intelligence
+    AI Recommendations          :2025-05, 2025-08
+    Compliance Checking         :2025-05, 2025-08
+    Collaboration Platform      :2025-06, 2025-08
+    Mobile App                  :2025-06, 2025-08
+    section Phase 3: Ecosystem
+    Public API                  :2025-09, 2025-12
+    CAD Plugins                 :2025-09, 2025-12
+    AR/VR Experiences           :2025-10, 2025-12
+    Procurement Automation      :2025-10, 2025-12
+```
 
 ### Phase 1: MVP Foundation (Months 1-4) - $1.2M
 
@@ -433,6 +464,38 @@ Final Proposal
 5. **Economic Recovery:** Return to office driving furniture demand
 
 ### Strategic Imperatives
+
+```mermaid
+graph TD
+    A{Invest in AI?} --> B[Yes: AI Investment]
+    A --> C[No: Status Quo]
+
+    B --> D[Market Leader Position]
+    B --> E[Premium Brand Perception]
+    B --> F[Operational Leverage]
+    B --> G[Higher Valuation Multiple]
+    B --> H[20+ Year Competitive Advantage]
+
+    C --> I[Legacy Brand Status]
+    C --> J[Lose Millennial/Gen Z Buyers]
+    C --> K[Margin Erosion]
+    C --> L[Dealer Attrition]
+    C --> M[Lower Valuation]
+
+    style A fill:#fff3cd
+    style B fill:#d4edda
+    style C fill:#f8d7da
+    style D fill:#d4edda
+    style E fill:#d4edda
+    style F fill:#d4edda
+    style G fill:#d4edda
+    style H fill:#d4edda
+    style I fill:#f8d7da
+    style J fill:#f8d7da
+    style K fill:#f8d7da
+    style L fill:#f8d7da
+    style M fill:#f8d7da
+```
 
 **Without AI Investment:**
 - OFS becomes "legacy" brand in digital-first market

@@ -947,6 +947,28 @@ Business intelligence dashboard with predictive models for demand forecasting, t
 ### Key User Flows
 
 #### Flow 1: New Project Creation (Fast Path)
+
+```mermaid
+graph TD
+    A[User Lands on Platform] --> B[Describe Project<br/>Natural Language]
+    B --> C{AI Understanding<br/>Clear?}
+    C -->|No| D[Ask Clarifying<br/>Questions 3-5]
+    C -->|Yes| E[Generate 3 Budget<br/>Scenarios]
+    D --> E
+    E --> F[User Reviews<br/>Options]
+    F --> G{Adjustments<br/>Needed?}
+    G -->|Yes| H[Refine with<br/>Sliders/NL]
+    G -->|No| I[Auto-Generate<br/>3D Preview]
+    H --> I
+    I --> J[One-Click<br/>Share Link]
+    J --> K[Export PDFs,<br/>3D Assets, Pricing]
+
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style I fill:#d4edda
+    style K fill:#d4edda
+```
+
 1. **Landing:** "Describe your project in a few sentences..."
 2. **Context Gathering:** AI asks 3-5 clarifying questions
 3. **Scenario Generation:** System shows 3 budget options in <10s
@@ -960,6 +982,30 @@ Business intelligence dashboard with predictive models for demand forecasting, t
 ---
 
 #### Flow 2: Floor Plan Upload Path
+
+```mermaid
+graph TD
+    A[Upload Floor Plan<br/>PDF/DWG/Image] --> B[AI Processing<br/>Extract Dimensions]
+    B --> C[Detect Features<br/>Walls/Doors/Windows]
+    C --> D[User Reviews<br/>Extracted Data]
+    D --> E{Corrections<br/>Needed?}
+    E -->|Yes| F[User Adjusts<br/>Manually]
+    E -->|No| G[AI Generates<br/>Furniture Layouts]
+    F --> G
+    G --> H[Run Compliance<br/>Check ADA/Codes]
+    H --> I{Violations<br/>Found?}
+    I -->|Yes| J[Show Issues +<br/>Auto-Fix Suggestions]
+    I -->|No| K[User Refines<br/>Drag-and-Drop]
+    J --> K
+    K --> L[Lock Design<br/>Move to Pricing]
+
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style G fill:#fff3cd
+    style H fill:#fff3cd
+    style L fill:#d4edda
+```
+
 1. **Upload:** Drag-and-drop PDF, DWG, or image
 2. **Processing:** AI extracts dimensions, detects features (30s)
 3. **Review:** User confirms/corrects extracted data
@@ -973,6 +1019,30 @@ Business intelligence dashboard with predictive models for demand forecasting, t
 ---
 
 #### Flow 3: Collaboration & Approval
+
+```mermaid
+sequenceDiagram
+    participant Designer
+    participant Platform
+    participant Client
+    participant Slack
+    participant Procurement
+
+    Designer->>Platform: Share Project Link
+    Platform->>Client: Send Notification
+    Client->>Platform: View 3D & Leave Comments
+    Platform->>Slack: Notify Designer
+    Platform->>Designer: Email Alert
+    Designer->>Platform: Address Feedback
+    Platform->>Client: Show Updates
+    Client->>Platform: Approve with e-Signature
+    Platform->>Procurement: Auto-Generate PO
+    Platform->>Designer: Handoff Complete
+    Platform->>Client: Status Updates
+
+    Note over Designer,Client: 2-3 days (vs. 7-10 days)
+```
+
 1. **Share:** Designer shares project link with client
 2. **Client Review:** Client views 3D, leaves comments
 3. **Notification:** Designer receives email + Slack alert
@@ -1133,6 +1203,43 @@ Business intelligence dashboard with predictive models for demand forecasting, t
 ---
 
 ## Implementation Phases
+
+```mermaid
+graph TB
+    subgraph Phase1["Phase 1: MVP Foundation (Months 1-4) - $1.2M"]
+        P1A[Conversational Interface]
+        P1B[Floor Plan Intelligence]
+        P1C[Budget Scenarios]
+        P1D[3D Visualization]
+        P1E[Product Catalog Integration]
+        P1F[User Auth & API Infrastructure]
+    end
+
+    subgraph Phase2["Phase 2: Intelligence Layer (Months 5-8) - $1.5M"]
+        P2A[AI Recommendation Engine]
+        P2B[Voice Input Support]
+        P2C[Compliance Checking]
+        P2D[Collaboration Platform]
+        P2E[Sustainability Tracking]
+        P2F[Mobile App]
+    end
+
+    subgraph Phase3["Phase 3: Ecosystem (Months 9-12) - $1.8M"]
+        P3A[Public API + Dev Portal]
+        P3B[CAD Plugins Revit/SketchUp]
+        P3C[CRM Connectors]
+        P3D[AR Mobile Experience]
+        P3E[VR Experience]
+        P3F[Procurement Automation]
+    end
+
+    Phase1 --> Phase2
+    Phase2 --> Phase3
+
+    style Phase1 fill:#e1f5ff
+    style Phase2 fill:#fff3cd
+    style Phase3 fill:#d4edda
+```
 
 ### Phase 1: MVP Foundation (Months 1-4)
 **Goal:** Replace current estimator with AI-enhanced version

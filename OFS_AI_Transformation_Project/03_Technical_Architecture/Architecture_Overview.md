@@ -78,6 +78,87 @@
 
 The platform follows a **microservices architecture** with clear separation of concerns:
 
+```mermaid
+graph TB
+    subgraph Frontend["Frontend Layer"]
+        WEB[Web App<br/>React]
+        MOBILE[Mobile App<br/>React Native]
+        PLUGINS[Desktop Plugins<br/>Revit/CAD]
+    end
+
+    subgraph Gateway["API Gateway Layer"]
+        APIGW[API Gateway<br/>Kong/AWS]
+    end
+
+    subgraph Backend["Backend Services"]
+        AI[AI/ML Services<br/>LLM, CV, ML]
+        CORE[Core Services<br/>Projects, Users, Products]
+        DATA[Data Services<br/>Analytics, Reporting]
+        INTEGRATION[Integration Services<br/>ERP, CRM, CAD]
+        RENDER[Rendering Services<br/>3D, AR/VR]
+    end
+
+    subgraph Infrastructure["Infrastructure Services"]
+        AUTH[Authentication]
+        QUEUE[Message Queue]
+        CACHE[Redis Cache]
+        STORAGE[Object Storage]
+        MONITOR[Monitoring]
+    end
+
+    subgraph Data["Data Layer"]
+        POSTGRES[(PostgreSQL<br/>OLTP)]
+        ANALYTICS[(ClickHouse<br/>OLAP)]
+        S3[(S3<br/>Files)]
+        VECTOR[(Vector DB<br/>Embeddings)]
+    end
+
+    WEB --> APIGW
+    MOBILE --> APIGW
+    PLUGINS --> APIGW
+
+    APIGW --> AI
+    APIGW --> CORE
+    APIGW --> DATA
+    APIGW --> INTEGRATION
+    APIGW --> RENDER
+
+    AI --> AUTH
+    AI --> QUEUE
+    AI --> CACHE
+    AI --> POSTGRES
+    AI --> VECTOR
+
+    CORE --> AUTH
+    CORE --> CACHE
+    CORE --> POSTGRES
+    CORE --> S3
+
+    DATA --> ANALYTICS
+    DATA --> POSTGRES
+
+    INTEGRATION --> QUEUE
+    INTEGRATION --> POSTGRES
+
+    RENDER --> S3
+    RENDER --> QUEUE
+
+    MONITOR -.-> WEB
+    MONITOR -.-> AI
+    MONITOR -.-> CORE
+    MONITOR -.-> DATA
+
+    style WEB fill:#e1f5ff
+    style MOBILE fill:#e1f5ff
+    style PLUGINS fill:#e1f5ff
+    style APIGW fill:#fff3cd
+    style AI fill:#d4edda
+    style CORE fill:#d4edda
+    style DATA fill:#d4edda
+    style INTEGRATION fill:#d4edda
+    style RENDER fill:#d4edda
+```
+
 **Frontend Services:**
 - Web application (SPA)
 - Mobile applications (iOS, Android)
@@ -1120,6 +1201,69 @@ ORDER BY (timestamp, user_id);
 
 ### Data Pipeline
 
+```mermaid
+graph LR
+    subgraph Sources["Data Sources"]
+        PG[(PostgreSQL<br/>OLTP)]
+        APP[Application<br/>Events]
+        EXT[External<br/>APIs]
+    end
+
+    subgraph Streaming["Real-Time Pipeline"]
+        DEB[Debezium<br/>CDC]
+        KAFKA[Kafka<br/>Message Bus]
+        FLINK[Flink<br/>Stream Processing]
+    end
+
+    subgraph Batch["Batch Pipeline"]
+        AIRFLOW[Airflow<br/>Orchestration]
+        S3[S3<br/>Data Lake]
+    end
+
+    subgraph Analytics["Analytics Layer"]
+        CLICK[(ClickHouse<br/>Real-Time OLAP)]
+        SNOW[(Snowflake<br/>Batch OLAP)]
+    end
+
+    subgraph Consumption["Data Consumption"]
+        BI[BI Tools<br/>Looker/Tableau]
+        ML[ML Models<br/>Training/Serving]
+        API[Analytics API<br/>Reports]
+    end
+
+    PG --> DEB
+    DEB --> KAFKA
+    KAFKA --> FLINK
+    FLINK --> CLICK
+
+    APP --> KAFKA
+    KAFKA --> CLICK
+
+    PG --> AIRFLOW
+    AIRFLOW --> S3
+    S3 --> SNOW
+
+    EXT --> AIRFLOW
+    AIRFLOW --> SNOW
+
+    CLICK --> BI
+    SNOW --> BI
+    CLICK --> ML
+    SNOW --> ML
+    CLICK --> API
+    SNOW --> API
+
+    style PG fill:#e1f5ff
+    style APP fill:#e1f5ff
+    style KAFKA fill:#fff3cd
+    style FLINK fill:#fff3cd
+    style AIRFLOW fill:#fff3cd
+    style CLICK fill:#d4edda
+    style SNOW fill:#d4edda
+    style BI fill:#f8d7da
+    style ML fill:#f8d7da
+```
+
 **CDC (Change Data Capture):**
 
 ```
@@ -1341,6 +1485,46 @@ Development → Staging → Production
 ---
 
 ### CI/CD Pipeline
+
+```mermaid
+graph LR
+    A[Code Push] --> B{Branch?}
+    B -->|develop| C[Run Tests]
+    B -->|main| C
+    B -->|feature| C
+
+    C --> D[Lint & Type Check]
+    D --> E[Unit Tests]
+    E --> F[E2E Tests]
+
+    F -->|Pass| G[Build Docker Image]
+    F -->|Fail| Z[Notify Team]
+
+    G --> H[Push to Registry]
+    H --> I{Target Environment?}
+
+    I -->|develop| J[Deploy to Staging]
+    I -->|main| K[Deploy to Production]
+
+    J --> L[Run Smoke Tests]
+    L --> M[Monitor Metrics]
+
+    K --> N[Canary Deployment<br/>10% Traffic]
+    N --> O[Monitor for 5 min]
+    O -->|Healthy| P[Full Rollout<br/>100% Traffic]
+    O -->|Issues| Q[Rollback]
+
+    P --> R[Monitor Production]
+    Q --> Z
+
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style G fill:#d4edda
+    style K fill:#d4edda
+    style P fill:#d4edda
+    style Z fill:#f8d7da
+    style Q fill:#f8d7da
+```
 
 **GitHub Actions Workflow:**
 
