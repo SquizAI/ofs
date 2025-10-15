@@ -7,6 +7,8 @@
 
 ---
 
+![OFS AI Transformation - GitHub Social Preview](./generated-images/ofs-github-preview-1280x640.png)
+
 ## Project Overview
 
 This repository contains comprehensive documentation for transforming OFS's Fast Furniture Estimator into an intelligent, AI-powered platform that revolutionizes furniture specification, sales, and delivery.
