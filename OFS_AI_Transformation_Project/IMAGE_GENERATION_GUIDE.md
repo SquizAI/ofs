@@ -13,7 +13,7 @@ The API key is stored in `.env` file (already configured):
 
 ```bash
 # .env
-GEMINI_API_KEY=***REMOVED***
+GEMINI_API_KEY=your_api_key_here
 ```
 
 **⚠️ Security:** The `.env` file is excluded from git via `.gitignore`
